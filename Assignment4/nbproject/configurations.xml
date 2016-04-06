@@ -7,9 +7,12 @@
       <itemPath>CircularLinkedList.h</itemPath>
       <itemPath>DoublyLinkedList.h</itemPath>
       <itemPath>DoublyLinkedListElement.h</itemPath>
+      <itemPath>LinkedList.h</itemPath>
       <itemPath>LinkedListElement.h</itemPath>
+      <itemPath>PriorityLinkedListElement.h</itemPath>
+      <itemPath>PriorityQueue.h</itemPath>
       <itemPath>Queue.h</itemPath>
-      <itemPath>SimpleVector.h</itemPath>
+      <itemPath>SortedLinkedList.h</itemPath>
       <itemPath>Stack.h</itemPath>
       <itemPath>TestClass.h</itemPath>
     </logicalFolder>
@@ -50,11 +53,17 @@
       </item>
       <item path="DoublyLinkedListElement.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="LinkedList.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="LinkedListElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PriorityLinkedListElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PriorityQueue.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Queue.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="SimpleVector.h" ex="false" tool="3" flavor2="0">
+      <item path="SortedLinkedList.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Stack.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -89,11 +98,17 @@
       </item>
       <item path="DoublyLinkedListElement.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="LinkedList.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="LinkedListElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PriorityLinkedListElement.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PriorityQueue.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Queue.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="SimpleVector.h" ex="false" tool="3" flavor2="0">
+      <item path="SortedLinkedList.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Stack.h" ex="false" tool="3" flavor2="0">
       </item>
