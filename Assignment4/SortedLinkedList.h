@@ -1,6 +1,6 @@
-// SimpleVector class template
-#ifndef SIMPLEVECTOR_H
-#define SIMPLEVECTOR_H
+// SortedLinkedList class template
+#ifndef SORTEDLINKEDLIST_H
+#define SORTEDLINKEDLIST_H
 #include <iostream>
 #include <new>       // Needed for bad_alloc exception
 #include <cstdlib>   // Needed for the exit function
@@ -11,7 +11,7 @@
 using namespace std;
 
 template <class T>
-class SimpleVector
+class SortedLinkedList
 {
 private:
    ListElement<T> *head;
@@ -21,7 +21,7 @@ private:
    
 public:
    // Default constructor
-   SimpleVector()
+   SortedLinkedList()
    {
        head = new ListElement<T>;
        head->pointer = 0;
@@ -30,52 +30,52 @@ public:
    }
       
    // Constructor declaration
-   SimpleVector(T);
+   SortedLinkedList(T);
    
    // Copy constructor declaration
-   SimpleVector(const SimpleVector &);
+   SortedLinkedList(const SortedLinkedList &);
    
    // Destructor declaration
-   ~SimpleVector();
+   ~SortedLinkedList();
    ListElement<T>* GetNext();
    // Overloaded [] operator declaration
    T &operator[](const int &);
    void Purge();
    void push_back(T);
-   void pop_off();
+   T  pop_off();
 };
 
 //***********************************************************
-// Constructor for SimpleVector class. Sets the size of the *
+// Constructor for SortedLinkedList class. Sets the size of the *
 // array and allocates memory for it.                       *
 //***********************************************************
 
 template <class T>
-SimpleVector<T>::SimpleVector(T data)
+SortedLinkedList<T>::SortedLinkedList(T data)
 {
        head = new ListElement<T>;
-       head->pointer = 0;
+       head->pointer = NULL;
        head->data = data;
        next = head;
 }
 
 //*******************************************
-// Copy Constructor for SimpleVector class. *
+// Copy Constructor for SortedLinkedList class. *
 //*******************************************
 
 template <class T>
-SimpleVector<T>::SimpleVector(const SimpleVector &obj)
+SortedLinkedList<T>::SortedLinkedList(const SortedLinkedList &obj)
 {
     this->head = obj->head;
     this->next = obj->next;
 }
 
 //**************************************
-// Destructor for SimpleVector class.  *
+// Destructor for SortedLinkedList class.  *
 //**************************************
 
 template <class T>
-SimpleVector<T>::~SimpleVector()
+SortedLinkedList<T>::~SortedLinkedList()
 {
     Purge();
     delete head;
@@ -87,7 +87,7 @@ SimpleVector<T>::~SimpleVector()
 //*******************************************************
 
 template <class T>
-void SimpleVector<T>::memError()
+void SortedLinkedList<T>::memError()
 {
    cout << "ERROR:Cannot allocate memory.\n";
    exit(EXIT_FAILURE);
@@ -99,16 +99,16 @@ void SimpleVector<T>::memError()
 //***********************************************************
 
 template <class T>
-void SimpleVector<T>::subError()
+void SortedLinkedList<T>::subError()
 {
    cout << "ERROR: Subscript out of range.\n";
    exit(EXIT_FAILURE);
 }
 
 template <class T>
-void SimpleVector<T>::Purge()
+void SortedLinkedList<T>::Purge()
 {
-    while(head->pointer != 0)
+    while(head != NULL)
     {
         ListElement<T>* temp = head;
         head = head->pointer;
@@ -123,7 +123,7 @@ void SimpleVector<T>::Purge()
 //*******************************************************
 
 template <class T>
-T &SimpleVector<T>::operator[](const int &sub)
+T &SortedLinkedList<T>::operator[](const int &sub)
 {
     ListElement<T>* temp = head;
     int count = sub;
@@ -141,7 +141,7 @@ T &SimpleVector<T>::operator[](const int &sub)
 }
 
 template <class T>
-ListElement<T>* SimpleVector<T>::GetNext()
+ListElement<T>* SortedLinkedList<T>::GetNext()
 {
     ListElement<T>* temp = next;
     
@@ -151,29 +151,52 @@ ListElement<T>* SimpleVector<T>::GetNext()
 }
 
 template <class T>
-void SimpleVector<T>::push_back(T value)
+void SortedLinkedList<T>::push_back(T value)
 {
-    ListElement<T>* temp = next;
-    
-    while(temp->pointer != 0)
+    ListElement<T>* temp = head;
+    ListElement<T>* tempLast = NULL;
+        
+    while(temp->data < value)
     {
+        tempLast = temp;
         temp = temp->pointer;
+        
+        if(temp == NULL)
+            break;
     }
     
-    temp->pointer = new ListElement<T>;
-    temp->pointer->data = value;
-    temp->pointer->pointer = 0;
+    
+    if(tempLast != NULL)
+    {
+        ListElement<T>* newElement = new ListElement<T>;
+        tempLast->pointer = newElement;
+        newElement->data = value;
+        newElement->pointer = temp;
+    }
+    else
+    {
+        ListElement<T>* newElement = new ListElement<T>;
+        newElement->pointer = head;
+        newElement->data = value;
+        head = newElement;
+    }
 }
 
 template <class T>
-void SimpleVector<T>::pop_off()
+T SortedLinkedList<T>::pop_off()
 {
-    if(head->pointer != 0)
+    T value = 0;
+    
+    if(head != NULL)
     {
+        value = head->data;
+        
         ListElement<T>* temp = head;
         head = head->pointer;
         delete temp;
     }
+    
+    return value;
     
 }
 #endif

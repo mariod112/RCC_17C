@@ -1,0 +1,11 @@
+Create a stack/queue from your linked list.
+
+Create a doubly linked list.
+
+Create a circularly linked list.
+
+Create a priority linked list -> priority queue.
+
+Create a sorted linked list.
+
+Submit here, email, post at Github.  Copy yourself on email, and send to mark.lehr@rcc.edu with subject:  Lastname, Firstname - Assignment 4 - 42102
