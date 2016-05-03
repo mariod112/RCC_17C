@@ -25,6 +25,16 @@ Token::Token(const Token& orig) {
     this->name = orig.name;
 }
 
+bool Token::operator==(const Token& other)
+{
+    return this->playerNumber == other.playerNumber;
+}
+
+bool Token::operator!=(const Token& other)
+{
+    return this->playerNumber != other.playerNumber;
+}
+
 Token::~Token() {
 }
 
