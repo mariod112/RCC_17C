@@ -58,7 +58,7 @@ void BoardColumn::moveColumn(BoardColumn* boardColumn)
 //Add a single token to top of list
 void BoardColumn::addToken(Token token)
 {
-    column.push_back(token);
+    column.push_front(token);
 }
 
 //Pull the top token in column
