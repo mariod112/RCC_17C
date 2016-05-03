@@ -12,6 +12,8 @@
  */
 
 #include <cstdlib>
+#include <iostream>
+#include "Dice.h"
 
 using namespace std;
 
@@ -20,6 +22,12 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
+    Dice dice(4, 1, 0);
+    int diceRoll = dice.Roll();
+    
+    cout << "DiceRoll: "<< dice.toString() << ": " << diceRoll << endl;
+    
+    
     return 0;
 }
 
