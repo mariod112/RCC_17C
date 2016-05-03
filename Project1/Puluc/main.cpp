@@ -33,11 +33,12 @@ int main(int argc, char** argv) {
     Token token2(1,2,"M2");
     Token token3(2,3,"C1");
     Token token4(2,2,"C2");
+
     
     column1.addToken(token1);
-    column1.addToken(token2);
-    column1.addToken(token3);
-    column2.addToken(token4);
+    column1.addToken(token4);
+    column2.addToken(token2);
+    column2.addToken(token3);
     
     cout << "DiceRoll: "<< dice.toString() << ": " << diceRoll << endl;
     cout << "1: " << column1.toString() << endl;
@@ -45,11 +46,12 @@ int main(int argc, char** argv) {
     
     cout << "Move from 1 to 2" << endl;
     
-    column2.moveColumn(&column1);
+    if(column2.peekTop() != column1.peekTop())
+        column2.moveColumn(&column1);
     
     cout << "1: " << column1.toString() << endl;
     cout << "2: " << column2.toString() << endl;
-            
+    
     return 0;
 }
 
