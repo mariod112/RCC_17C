@@ -32,6 +32,8 @@ public:
     int getTokenNumber(){return this->tokenNumber;}
     string getName() const {return this->name;}
     void setName(string name){this->name = name;}
+    bool operator==(const Token& other);
+    bool operator!=(const Token& other);
     virtual ~Token();
 };
 
