@@ -51,12 +51,14 @@ int Dice::Roll()
 string Dice::toString()
 {
     string diceString;
-    //sort(dice.begin(), dice.end());
+    dice.sort();//sort before displaying
     
     for(int value: dice)
     {
         diceString += to_string(value) + ",";
     }
+    
+    diceString.pop_back();//remove last coma
     
     return diceString;
 }

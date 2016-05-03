@@ -30,7 +30,7 @@ public:
     int getPlayer(){return this->playerNumber;}
     void setTokenNumber(int number){this->tokenNumber = number;}
     int getTokenNumber(){return this->tokenNumber;}
-    string getName(){return this->name;}
+    string getName() const {return this->name;}
     void setName(string name){this->name = name;}
     virtual ~Token();
 };
