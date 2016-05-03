@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Dice.h"
+#include "BoardColumn.h"
 
 using namespace std;
 
@@ -23,11 +24,27 @@ using namespace std;
 int main(int argc, char** argv) {
 
     Dice dice(4, 1, 0);
+    BoardColumn column1;
+    BoardColumn column2;
+    
     int diceRoll = dice.Roll();
     
+    Token token1(1,1,"M1");
+    Token token2(1,2,"M2");
+    Token token3(1,3,"M3");
+    
+    column1.addToken(token1);
+    column1.addToken(token2);
+    column1.addToken(token3);
+    
     cout << "DiceRoll: "<< dice.toString() << ": " << diceRoll << endl;
+    cout << "Column1: " << column1.toString() << endl;
     
+    column2.addToken(column1.pullTopToken());
     
+    cout << "Column1: " << column1.toString() << endl;
+    cout << "Column2: " << column2.toString() << endl;
+            
     return 0;
 }
 
