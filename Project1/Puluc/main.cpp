@@ -15,6 +15,7 @@
 #include <iostream>
 #include "Dice.h"
 #include "BoardColumn.h"
+#include "Board.h"
 
 using namespace std;
 
@@ -26,8 +27,18 @@ int main(int argc, char** argv) {
     Dice dice(4, 1, 0);
     BoardColumn column1;
     BoardColumn column2;
+    BoardColumn column3;
+    Board board;
     
     int diceRoll = dice.Roll();
+    
+    string column1Name = "1";
+    string column1Name1 = "2";
+    string column3Name = "3";
+    
+    board.addColumn(column1Name,&column1);
+    board.addColumn(column1Name1,&column2);
+    board.addColumn(column3Name,&column3);
     
     Token token1(1,1,"M1");
     Token token2(1,2,"M2");
@@ -36,21 +47,24 @@ int main(int argc, char** argv) {
 
     
     column1.addToken(token1);
-    column1.addToken(token4);
+    column1.addToken(token2);
     column2.addToken(token2);
-    column2.addToken(token3);
+    column2.addToken(token4);
     
     cout << "DiceRoll: "<< dice.toString() << ": " << diceRoll << endl;
-    cout << "1: " << column1.toString() << endl;
-    cout << "2: " << column2.toString() << endl;
-    
+    //cout << "1: " << column1.toString() << endl;
+    //cout << "2: " << column2.toString() << endl;
+    cout <<  board.toString() << endl;
+ 
     cout << "Move from 1 to 2" << endl;
     
     if(column2.peekTop() != column1.peekTop())
         column2.moveColumn(&column1);
     
-    cout << "1: " << column1.toString() << endl;
-    cout << "2: " << column2.toString() << endl;
+   // cout << "1: " << column1.toString() << endl;
+    //cout << "2: " << column2.toString() << endl;
+    
+    cout <<  board.toString() << endl;
     
     return 0;
 }

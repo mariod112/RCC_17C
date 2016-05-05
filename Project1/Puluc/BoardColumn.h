@@ -33,6 +33,8 @@ public:
     void clearColumn();
     void moveColumn(BoardColumn* boardColumn);
     Token pullTopToken();
+    bool operator==(const Token& other);
+//    bool operator!=(const Token& other);
     string toString();
     virtual ~BoardColumn();
 

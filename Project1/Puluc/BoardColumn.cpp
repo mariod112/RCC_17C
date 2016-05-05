@@ -69,6 +69,19 @@ Token BoardColumn::pullTopToken()
     return temp;
 }
 
+
+//bool operator==(const BoardColumn& other)
+//{
+//    bool status;
+//    status = column == other->getColumnTokens();
+//    return status;
+//}
+
+//bool operator!=(const BoardColumn& other)
+//{
+//    
+//}
+
 //print list of tokens
 string BoardColumn::toString()
 {
