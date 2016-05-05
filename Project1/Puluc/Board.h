@@ -34,6 +34,10 @@ public:
     Board();
     Board(const Board& orig);
     void addColumn(string name, BoardColumn* column);
+    void moveColumn(string from, string to);
+    void moveTokenFromHome(string to, int playerNumber);
+    void moveTokenIntoHome(Token token);
+    void killToken(Token token);
     string toString();
     virtual ~Board();
 

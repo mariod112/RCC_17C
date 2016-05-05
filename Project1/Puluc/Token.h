@@ -29,11 +29,12 @@ public:
     void setPlayer(int number){this->playerNumber = number;}
     int getPlayer(){return this->playerNumber;}
     void setTokenNumber(int number){this->tokenNumber = number;}
-    int getTokenNumber(){return this->tokenNumber;}
+    int getTokenNumber() const {return this->tokenNumber;}
     string getName() const {return this->name;}
     void setName(string name){this->name = name;}
     bool operator==(const Token& other);
     bool operator!=(const Token& other);
+    bool operator<(const Token& other)const;
     virtual ~Token();
 };
 

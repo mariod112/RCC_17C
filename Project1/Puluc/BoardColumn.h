@@ -31,10 +31,8 @@ public:
     void addTokenListOnTop(list<Token>* tokenList);
     void addToken(Token token);
     void clearColumn();
-    void moveColumn(BoardColumn* boardColumn);
+    void moveOnTopColumn(BoardColumn* boardColumn);
     Token pullTopToken();
-    bool operator==(const Token& other);
-//    bool operator!=(const Token& other);
     string toString();
     virtual ~BoardColumn();
 

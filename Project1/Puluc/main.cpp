@@ -52,17 +52,16 @@ int main(int argc, char** argv) {
     column2.addToken(token4);
     
     cout << "DiceRoll: "<< dice.toString() << ": " << diceRoll << endl;
-    //cout << "1: " << column1.toString() << endl;
-    //cout << "2: " << column2.toString() << endl;
     cout <<  board.toString() << endl;
  
     cout << "Move from 1 to 2" << endl;
     
     if(column2.peekTop() != column1.peekTop())
-        column2.moveColumn(&column1);
+        board.moveColumn("4","2");
     
-   // cout << "1: " << column1.toString() << endl;
-    //cout << "2: " << column2.toString() << endl;
+    board.moveTokenFromHome("1",1);
+    board.moveTokenIntoHome(token4);
+    board.killToken(token3);
     
     cout <<  board.toString() << endl;
     

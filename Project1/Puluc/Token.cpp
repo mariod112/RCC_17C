@@ -11,6 +11,8 @@
  * Created on May 1, 2016, 6:33 PM
  */
 
+#include <vector>
+
 #include "Token.h"
 
 Token::Token(int playerNumber, int tokenNumber, string name) {
@@ -33,6 +35,10 @@ bool Token::operator==(const Token& other)
 bool Token::operator!=(const Token& other)
 {
     return this->playerNumber != other.playerNumber;
+}
+bool Token::operator<(const Token& other)const
+{
+    return (tokenNumber < other.getTokenNumber());
 }
 
 Token::~Token() {
