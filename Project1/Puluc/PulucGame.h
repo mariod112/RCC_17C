@@ -32,8 +32,8 @@ public:
     void setPlayer1Name(string name);
     void setPlayer2Name(string name);
     void setUpBoard();
+    void moveToBase(int from);
     string boardString();
-    int rollDice();
     virtual ~PulucGame();
 
 private:

@@ -15,7 +15,7 @@
 #include "Token.h"
 #include "BoardColumn.h"
 
-PulucGame::PulucGame():player1("M",1),player2("C",2),dice(5,1,0)
+PulucGame::PulucGame():player1("X",1),player2("O",2),dice(5,1,0)
 {
 }
 
@@ -58,22 +58,41 @@ void PulucGame::setUpBoard()
         board.addColumn(i, column);
     }
     
-    board.moveTokenFromHome(1,1);
-    board.moveTokenFromHome(1,1);
-    board.moveTokenFromHome(2,2);
-    board.killToken(board.getColumnTokens(1).front());
-    board.clearColumn(1);
-    board.moveTokensInColumn(1,2);
+    board.moveTokenFromHome(5,1);
+    board.moveTokenFromHome(5,2);
 }
 
-string PulucGame::boardString()
+void PulucGame::moveToBase(int from)
 {
-    return board.toString();
+    list<Token> tempList = board.getColumnTokens(from);
+    list<Token>::iterator listIterator = tempList.begin();
+    int playerBase = listIterator->getPlayer();
+    
+    while(listIterator != tempList.end())
+    {
+        if(listIterator->getPlayer() == playerBase)
+        {
+            board.moveTokenIntoHome(*listIterator);
+        }
+        else
+        {
+            board.killToken(*listIterator);
+        }
+               
+        listIterator++;
+    }
+    
+    board.clearColumn(from);
 }
 
 int PulucGame::rollDice()
 {
     return dice.Roll();
+}
+
+string PulucGame::boardString()
+{
+    return board.toString();
 }
 
 PulucGame::~PulucGame() {
