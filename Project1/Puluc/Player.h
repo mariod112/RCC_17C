@@ -22,6 +22,7 @@ private:
     string name;
     int playerNumber;
 public:
+    Player();
     Player(string name, int number);
     Player(const Player& orig);
     string getName(){return this->name;}

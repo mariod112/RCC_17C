@@ -16,6 +16,9 @@
 #include <string>
 #include "Token.h"
 
+#include <cstdlib>
+#include <iostream>
+
 using namespace std;
 
 BoardColumn::BoardColumn() {
@@ -74,11 +77,21 @@ string BoardColumn::toString()
 {
     string columnString;
     list<Token>::const_iterator columnIterator;//get list iterator
-    
-    for(columnIterator = column.begin(); columnIterator != column.end(); ++columnIterator)//iterate through list of tokens
+
+    if(!column.empty())
     {
-        string temp = columnIterator->getName();//get token name
-        columnString += temp + "  ";//add name to column string
+        cout << column.size();
+        columnIterator = column.begin();
+        
+        while(columnIterator != column.end())
+        {
+            columnIterator++;
+        }
+//        for(columnIterator = column.begin(); columnIterator != column.end(); ++columnIterator)//iterate through list of tokens
+        {
+//            string temp = columnIterator->getName();//get token name
+//            columnString += temp + "  ";//add token name to column string
+        }
     }
     
     return columnString;

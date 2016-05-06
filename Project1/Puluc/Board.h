@@ -25,7 +25,7 @@ using namespace std;
 
 class Board {
 private:
-    map<string,BoardColumn*> board;
+    map<int,BoardColumn*> board;
     queue<Token> player1Home;
     queue<Token> player2Home;
     set<Token> player1DeadTokens;
@@ -33,9 +33,9 @@ private:
 public:
     Board();
     Board(const Board& orig);
-    void addColumn(string name, BoardColumn* column);
-    void moveColumn(string from, string to);
-    void moveTokenFromHome(string to, int playerNumber);
+    void addColumn(int number, BoardColumn* column);
+    void moveTokensInColumn(int from, int to);
+    void moveTokenFromHome(int to, int playerNumber);
     void moveTokenIntoHome(Token token);
     void killToken(Token token);
     string toString();
