@@ -35,15 +35,21 @@ Token BoardColumn::peekTop()
 }
 
 //return list of tokens (column)
-list<Token>* BoardColumn::getColumnTokens()
+list<Token> BoardColumn::getColumnTokens()
 {
-    return &column;
+    return column;
 }
 
 //Add a list of tokens to top of list
-void BoardColumn::addTokenListOnTop(list<Token>* tokenList)
+void BoardColumn::addTokenListOnTop(list<Token> tokenList)
 {
-    column.splice(column.begin(), *tokenList);
+    list<Token>::iterator tokenIterator = tokenList.end();
+    
+    while(tokenIterator != tokenList.begin())
+    {
+        tokenIterator--;
+        column.push_front(*tokenIterator);   
+    }
 }
 
 //Clear column of all tokens
@@ -53,9 +59,9 @@ void BoardColumn::clearColumn()
 }
 
 //Move column from boardColumn to this column
-void BoardColumn::moveOnTopColumn(BoardColumn* boardColumn)
+void BoardColumn::moveOnTopColumn(BoardColumn boardColumn)
 {
-    addTokenListOnTop(boardColumn->getColumnTokens());
+    addTokenListOnTop(boardColumn.getColumnTokens());
 }
 
 //Add a single token to top of list
@@ -76,21 +82,14 @@ Token BoardColumn::pullTopToken()
 string BoardColumn::toString()
 {
     string columnString;
-    list<Token>::const_iterator columnIterator;//get list iterator
+    list<Token>::iterator columnIterator;//get list iterator
 
     if(!column.empty())
     {
-        cout << column.size();
-        columnIterator = column.begin();
-        
-        while(columnIterator != column.end())
+        for(columnIterator = column.begin(); columnIterator != column.end(); ++columnIterator)//iterate through list of tokens
         {
-            columnIterator++;
-        }
-//        for(columnIterator = column.begin(); columnIterator != column.end(); ++columnIterator)//iterate through list of tokens
-        {
-//            string temp = columnIterator->getName();//get token name
-//            columnString += temp + "  ";//add token name to column string
+            string temp = columnIterator->getName();//get token name
+            columnString += temp + "  ";//add token name to column string
         }
     }
     

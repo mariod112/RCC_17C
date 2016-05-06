@@ -26,12 +26,12 @@ public:
     BoardColumn();
     BoardColumn(const BoardColumn& orig);
     Token peekTop();
-    list<Token>* getColumnTokens();
+    list<Token> getColumnTokens();
     list<Token> removeColumnTokens();
-    void addTokenListOnTop(list<Token>* tokenList);
+    void addTokenListOnTop(list<Token> tokenList);
     void addToken(Token token);
     void clearColumn();
-    void moveOnTopColumn(BoardColumn* boardColumn);
+    void moveOnTopColumn(BoardColumn boardColumn);
     Token pullTopToken();
     string toString();
     virtual ~BoardColumn();

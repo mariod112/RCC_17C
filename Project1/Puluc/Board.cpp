@@ -31,7 +31,7 @@ Board::Board(const Board& orig) {
     this->player2DeadTokens= orig.player2DeadTokens;
 }
 
-void Board::addColumn(int number, BoardColumn* column)
+void Board::addColumn(int number, BoardColumn column)
 {
     board[number] = column;
 }
@@ -39,7 +39,10 @@ void Board::addColumn(int number, BoardColumn* column)
 void Board::moveTokensInColumn(int from, int to)
 {
     if(board.count(from) != 0 && board.count(to) != 0)
-        board[to]->moveOnTopColumn(board[from]);
+    {
+        board[to].moveOnTopColumn(board[from]);
+        board[from].clearColumn();
+    }
 }
 
 void Board::moveTokenFromHome(int to, int playerNumber)
@@ -50,7 +53,7 @@ void Board::moveTokenFromHome(int to, int playerNumber)
        {
            if(!player1Home.empty())
            {
-               board[to]->addToken(player1Home.front());
+               board[to].addToken(player1Home.front());
                player1Home.pop();
            }
        }
@@ -58,7 +61,7 @@ void Board::moveTokenFromHome(int to, int playerNumber)
        {
            if(!player1Home.empty())
            {
-               board[to]->addToken(player2Home.front());
+               board[to].addToken(player2Home.front());
                player2Home.pop();
            }
        }
@@ -77,7 +80,17 @@ void Board::moveTokenIntoHome(Token token)
     }
 }
 
-void Board::killToken(Token token)
+list<Token> Board::getColumnTokens(int from)
+{
+    return board[from].getColumnTokens();
+}
+
+void Board::clearColumn(int column)
+{
+    board[column].clearColumn();
+}
+
+void Board::killToken(Token token)//token needs to be removed from original location
 {
     if(token.getPlayer() == 1)
     {
@@ -93,10 +106,10 @@ string Board::toString()
 {
     string boardString;
     
-    map<int,BoardColumn*>::iterator mapIterator = board.begin();
+    map<int,BoardColumn>::iterator mapIterator = board.begin();
     set<Token>::iterator deadIterator;
     
-    boardString += "Player 1: \n";
+    boardString = "Player 1: \n";
     boardString += "  Pieces at base: " + to_string(player1Home.size()) + "\n";
     boardString += "  Pieces dead: ";
     
@@ -113,7 +126,7 @@ string Board::toString()
     while(mapIterator != board.end())
     {
         boardString += "-----------------------------------------\n";
-        boardString += to_string(mapIterator->first) + ":" + mapIterator->second->toString() + "\n";
+        boardString += to_string(mapIterator->first) + ":" + mapIterator->second.toString() + "\n";
  
         mapIterator++;
     }

@@ -33,8 +33,11 @@ public:
     void setPlayer2Name(string name);
     void setUpBoard();
     string boardString();
+    int rollDice();
     virtual ~PulucGame();
 
+private:
+    int rollDice();
 };
 
 #endif /* PULUCGAME_H */
