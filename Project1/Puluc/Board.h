@@ -36,11 +36,15 @@ public:
     Board(const Board& orig);
     void addColumn(int number, BoardColumn column);
     void moveTokensInColumn(int from, int to);
-    void moveTokenFromHome(int to, int playerNumber);
+    bool moveTokenFromHome(int to, int playerNumber);
     void moveTokenIntoHome(Token token);
     list<Token> getColumnTokens(int from);
+    int getColumnPlayer(int from);
     void clearColumn(int column);
     void killToken(Token token);
+    int getKillCount(int player);
+    int getHomeCount(int player);
+    bool checkPlayerFreeOnBoard(int player);
     string toString();
     virtual ~Board();
 

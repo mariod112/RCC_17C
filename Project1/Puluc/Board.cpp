@@ -45,7 +45,7 @@ void Board::moveTokensInColumn(int from, int to)
     }
 }
 
-void Board::moveTokenFromHome(int to, int playerNumber)
+bool Board::moveTokenFromHome(int to, int playerNumber)
 {
    if(board.count(to) != 0)
    {
@@ -56,16 +56,24 @@ void Board::moveTokenFromHome(int to, int playerNumber)
                board[to].addToken(player1Home.front());
                player1Home.pop();
            }
+           else
+               return false;
        }
        else
        {
-           if(!player1Home.empty())
+           if(!player2Home.empty())
            {
                board[to].addToken(player2Home.front());
                player2Home.pop();
            }
+           else
+               return false;
        }
+       
+       return true;
    }
+   
+   return false;
 }
 
 void Board::moveTokenIntoHome(Token token)
@@ -85,6 +93,11 @@ list<Token> Board::getColumnTokens(int from)
     return board[from].getColumnTokens();
 }
 
+int Board::getColumnPlayer(int from)
+{
+    return board[from].getTopPlayer();
+}
+
 void Board::clearColumn(int column)
 {
     board[column].clearColumn();
@@ -100,6 +113,45 @@ void Board::killToken(Token token)//token needs to be removed from original loca
     {
       player2DeadTokens.insert(token);   
     }
+}
+
+int Board::getKillCount(int player)
+{
+    if(player == 1)
+    {
+        return player1DeadTokens.size();
+    }
+    else
+    {
+      return player2DeadTokens.size();   
+    } 
+}
+
+int Board::getHomeCount(int player)
+{
+    if(player == 1)
+    {
+        return player1Home.size();
+    }
+    else
+    {
+      return player2Home.size();   
+    } 
+}
+
+bool Board::checkPlayerFreeOnBoard(int player)
+{
+    map<int,BoardColumn>::iterator mapIterator = board.begin();
+    
+    while(mapIterator != board.end())
+    {
+        if(mapIterator->second.getTopPlayer() == player)//check if player controls column
+            return true;
+        
+        mapIterator++;
+    }
+    
+    return false;
 }
 
 string Board::toString()
@@ -144,6 +196,8 @@ string Board::toString()
             boardString += deadIterator->getName() + " ";
         }
     }
+    
+    boardString += "\n\n";
     
     return boardString; 
 }

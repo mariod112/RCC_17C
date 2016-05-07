@@ -34,6 +34,14 @@ Token BoardColumn::peekTop()
     return column.front();
 }
 
+int BoardColumn::getTopPlayer()
+{
+    if(!column.empty())
+        return column.front().getPlayer();
+    else
+        return -1;
+}
+
 //return list of tokens (column)
 list<Token> BoardColumn::getColumnTokens()
 {

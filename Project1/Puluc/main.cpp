@@ -23,70 +23,99 @@ using namespace std;
 /*
  * 
  */
-int main(int argc, char** argv) {
+int main(int argc, char** argv) { 
 
     PulucGame puluc;
     string tempName;
+    int from;
+    string direction;
+    bool directionBool;
+    bool validFrom = false;
+    bool validDirection = false;
+    bool validMove = true;//make first move
     
-//    cout << "Please Enter Player 1 name: ";
-//    cin >> tempName;
-//    puluc.setPlayer1Name(tempName);
-//    
-//    cout << "Please Enter Player 2 name: ";
-//    cin >> tempName;
-//    puluc.setPlayer2Name(tempName);
+    cout << "Rules available at: http://www.boardgamesoftheworld.com/puluc.html" <<endl;
     
-//    BoardColumn column;
-//    cout << "test: " << column.toString() << endl;
+    cout << "Please Enter Player 1 name: ";
+    cin >> tempName;
+    puluc.setPlayer1Name(tempName);
+    
+    cout << "Please Enter Player 2 name: ";
+    cin >> tempName;
+    puluc.setPlayer2Name(tempName);
+    
     
     puluc.setUpBoard();
     
-    cout << puluc.boardString();
-//    
-//    
-//    Dice dice(4, 1, 0);
-//    BoardColumn column1;
-//    BoardColumn column2;
-//    BoardColumn column3;
-//    Board board;
-//    
-//    int diceRoll = dice.Roll();
-//    
-//    string column1Name = "1";
-//    string column1Name1 = "2";
-//    string column3Name = "3";
-//    
-//    board.addColumn(1,&column);
-//    board.addColumn(column1Name1,&column2);
-//    board.addColumn(column3Name,&column3);
-//    
-//    Token token1(1,1,"M1");
-//    Token token2(1,2,"M2");
-//    Token token3(2,3,"C1");
-//    Token token4(2,2,"C2");
-//
-//    
-//    column1.addToken(token1);
-//    column1.addToken(token2);
-//    column2.addToken(token2);
-//    column2.addToken(token4);
-//    
-//    cout << "DiceRoll: "<< dice.toString() << ": " << diceRoll << endl;
-//    cout <<  board.toString() << endl;
-// 
-//    cout << "Move from 1 to 2" << endl;
-//    
-//    if(column2.peekTop() != column1.peekTop())
-//        board.moveTokensInColumn("4","2");
-//    
+    do
+    {
+        if(validMove)//only go to next turn after valid move
+        {
+            cout << puluc.boardString();
+            cout << puluc.nextTurn() << endl;
+        }
+        
+        while(!validFrom)
+        {
+            cout << "Which row would you like to move from: 0 for base, -1 to pass, or -2 to exit)? ";
+            cin >> from;
+
+            if(from == -2)
+            {
+                cout << "Exit";
+                return 0;
+            }
+            else if(from == 0 || from == -1)//move from base skip direction
+            {
+                validFrom = true;
+                validDirection = true;
+            }                
+            else if((from < 0) && (from > 11))
+            {
+                cout << "----Invalid input please try again----" << endl;
+                validFrom = false;
+            }
+            else
+                validFrom = true;
+        }
+
+        while(!validDirection)
+        {
+            cout << "Move up (u) or down (d) or -1 to exit?";
+            cin >> direction;
+
+            switch(direction.at(0))
+            {
+                case 'u':
+                    directionBool = true;
+                    validDirection = true;
+                    break;
+                case 'd':
+                    directionBool = false;
+                    validDirection = true;
+                    break;
+                case '-':
+                    cout << "Exit";
+                    return 0;
+                default:
+                    cout << "----Invalid input please try again----";
+                    validDirection = false;
+                    break;
+            }
+        }
+
+        validMove = puluc.nextMove(from,directionBool);
+        
+        if(!validMove)
+            cout << "----Invalid move please try again----" << endl;
+ 
+        validFrom =false;
+        validDirection = false;
+        
+    }while(!puluc.getGameEnded());
     
-//    board.moveTokenIntoHome(token1);
-//    cout <<  board.toString() << endl;
-//    board.moveTokenFromHome(1,1);
-////    board.killToken(token3);
-////    
-//    cout <<  board.toString() << endl;
-    
+    cout << puluc.winnerString();
+   
     return 0;
 }
 

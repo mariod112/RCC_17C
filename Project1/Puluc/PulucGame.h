@@ -25,19 +25,24 @@ private:
     Player player2;
     Dice dice;
     Board board;
-    bool gameEnded;
-    int currentTurn;
+    int currentPlayer;
+    int lastDiceRoll;
 public:
     PulucGame();
     void setPlayer1Name(string name);
     void setPlayer2Name(string name);
     void setUpBoard();
     void moveToBase(int from);
+    bool moveFromBase(int to);
+    bool moveFromColumn(int from, int to);
+    Player getCurrentPlayer();
+    string nextTurn();
+    bool nextMove(int from, bool direction);
+    bool getGameEnded();
+    string playerNextTurnString();
+    string winnerString();
     string boardString();
     virtual ~PulucGame();
-
-private:
-    int rollDice();
 };
 
 #endif /* PULUCGAME_H */

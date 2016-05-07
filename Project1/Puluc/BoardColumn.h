@@ -26,6 +26,7 @@ public:
     BoardColumn();
     BoardColumn(const BoardColumn& orig);
     Token peekTop();
+    int getTopPlayer();
     list<Token> getColumnTokens();
     list<Token> removeColumnTokens();
     void addTokenListOnTop(list<Token> tokenList);
