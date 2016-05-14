@@ -13,80 +13,97 @@
 
 #include <cstdlib>
 #include <vector>
+#include <list>
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <math.h>
 #include <chrono>
 
 using namespace std;
 using namespace std::chrono;
 
 vector<string> fillArray(int);
-vector<string> fillHashedArray(int);
+vector<list<string>> fillHashedArray(vector<string>);
 
 int binarySearch(vector<string>  array, int length, string value);
 int linearSearch(vector<string>  array, int length, string value);
+int findHashIndex(vector<list<string>>* hashedArray, string value);
+
+int hashFunction(string input);
 
 int main(int argc, char** argv) {
     //srand(static_cast<unsigned int>(time(0)));
-    for(int x = 1; x < 6; x++)
+    cout << "N,\t\t Linear, \t\t Binary, \t\t Hash" << endl;
+    for(int x = 1; x < 20; x++)
     {
-        int arraySize = 10000 * x;
+        int arraySize = 1000 * x;
         vector<string> stringArray = fillArray(arraySize);
-        vector<string> hashStringArray = fillHashedArray(arraySize);//incomplete
+        vector<list<string>> hashStringArray = fillHashedArray(stringArray);//incomplete
         high_resolution_clock::time_point startChrono;
         high_resolution_clock::time_point endChrono;
         duration<double> time_span;
 
-//        for(int i = 0; i < 10; i++)
-//        {
-//            cout << stringArray[i] << endl;
-//        }
-
-
-        sort(stringArray.begin(), stringArray.end());
-
+        cout << arraySize << ",\t\t ";
         int foundAtIndex;
-        string stringToFind = "?:)(&3;>3?18+>)7'A45";
+        string stringToFind = stringArray[99];//"VVKESCXDSSDHCGMRQPUU";
+         startChrono = high_resolution_clock::now();
+        foundAtIndex = linearSearch(stringArray, arraySize, stringToFind);
+        endChrono = high_resolution_clock::now();
+        time_span = duration_cast<duration<double>>(endChrono - startChrono);
 
+        //cout << "Linear Found in " << time_span.count()  << " sec" << endl;
+        cout << time_span.count() << ",\t\t ";
+        
+        sort(stringArray.begin(), stringArray.end());
+        
         startChrono = high_resolution_clock::now();
         foundAtIndex = binarySearch(stringArray, arraySize, stringToFind);
         endChrono = high_resolution_clock::now();
         time_span = duration_cast<duration<double>>(endChrono - startChrono);
 
-        cout << "Binary Found in " << time_span.count()  << " sec" << endl;
+        //cout << "Binary Found in " << time_span.count()  << " sec" << endl;
+        cout << time_span.count() << ",\t\t ";
 
 
         startChrono = high_resolution_clock::now();
-        foundAtIndex = linearSearch(stringArray, arraySize, stringToFind);
+        foundAtIndex = findHashIndex(&hashStringArray, stringToFind);
         endChrono = high_resolution_clock::now();
         time_span = duration_cast<duration<double>>(endChrono - startChrono);
-
-        cout << "Linear Found in " << time_span.count()  << " sec" << endl;
+        
+        //cout << "Hash Found in " << time_span.count()  << " sec" << endl;
+        cout << time_span.count() << endl;
     }
     
     return 0;
 }
 
-vector<string> fillHashedArray(int arraySize)
+int hashFunction(string input)
 {
-    int stringSize = 20;
-    vector<string> stringArray(arraySize);
+    int index = 0;
     
-    for(int i = 0; i < arraySize; i++)
+    for(int i = 0; i < input.size() / 5; i++)//use first five char to create hash
     {
-        string tempString;
-        
-        for(int j = 0; j < stringSize; j++)
-        {  
-            char temp = (char)(rand() % (65 - 33 + 1) + 33);//generate random ascii char
-            tempString.push_back(temp);
-        }
-        
-        stringArray[i] = tempString;
+        int tempChar = (int)input[i];
+        index += (int)input[i] * pow(26,i);
     }
     
-    return stringArray;
+    return index;
+}
+
+vector<list<string>> fillHashedArray(vector<string> stringArray)
+{
+    vector<list<string>> hashedArray(stringArray.size());
+    
+    for(int i = 0; i < stringArray.size(); i++)
+    {
+        string tempString = stringArray[i];
+        
+        int index = hashFunction(tempString) % stringArray.size();
+        hashedArray[index].push_back(tempString);
+    }
+    
+    return hashedArray;
 }
 
 vector<string> fillArray(int arraySize)
@@ -100,7 +117,7 @@ vector<string> fillArray(int arraySize)
         
         for(int j = 0; j < stringSize; j++)
         {  
-            char temp = (char)(rand() % (65 - 33 + 1) + 33);//generate random ascii char
+            char temp = (char)(rand() % (90 - 66 + 1) + 66);//generate random ascii capital letters
             tempString.push_back(temp);
         }
         
@@ -108,6 +125,28 @@ vector<string> fillArray(int arraySize)
     }
     
     return stringArray;
+}
+
+int findHashIndex(vector<list<string>>* hashedArray, string value)
+{     
+    int indexOf = hashFunction(value) % hashedArray->size();
+    list<string>::iterator iteratorHash;
+
+    iteratorHash = (*hashedArray)[indexOf].begin();
+
+    for(int y = 0; y < (*hashedArray)[indexOf].size(); y++)//iterate through list in hashed vector
+    {
+        string inList = *iteratorHash;
+        
+        if(inList.compare(value) == 0)//value found return index
+        {
+            return indexOf;
+        }
+
+        iteratorHash++;
+    }
+    
+    return -1;
 }
 
 int binarySearch(vector<string> array, int length, string value)
