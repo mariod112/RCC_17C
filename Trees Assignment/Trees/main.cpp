@@ -12,6 +12,9 @@
  */
 
 #include <cstdlib>
+#include <list>
+#include <iostream>
+#include "TreeNode.h"
 
 using namespace std;
 
@@ -19,7 +22,21 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
+    TreeNode node(1);
 
+    node.addChild(2);
+    node.addChild(3);
+
+    list<TreeNode*>::iterator tempNodeIterator = node.getChildren()->begin();
+    
+    cout << "Node Data: " << node.getData() << endl;
+    
+    while(tempNodeIterator != node.getChildren()->end())
+    {
+        cout << "Node Data: " << (*tempNodeIterator)->getData() << endl;
+        tempNodeIterator++;
+    }
+    
     return 0;
 }
 
