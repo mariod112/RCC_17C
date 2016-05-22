@@ -10,19 +10,22 @@
  *
  * Created on May 20, 2016, 9:30 AM
  */
+#include "TreeNode.h"
 
 #ifndef TREE_H
 #define TREE_H
 
 class Tree {
     private:
-        
+        TreeNode* root;
+        int m;
+        int currentFullLevel;
     public:
-        Tree();
+        Tree(int m);
         Tree(const Tree& orig);
+        bool insertData(int data);
+        void print();
         virtual ~Tree();
-
-
 };
 
 #endif /* TREE_H */

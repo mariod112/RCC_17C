@@ -135,7 +135,7 @@ void TreeNode::printChildren()
         childIterator++;
     }
     
-     if(this->isFull())
+     if(!this->isLeaf())
         cout << endl;
     
     childIterator = this->children.begin();
