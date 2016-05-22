@@ -21,15 +21,25 @@ using namespace std;
 class TreeNode {
 private:
     int data;
+    int m;
+    int level;
+    TreeNode* parent;
     list<TreeNode*> children;
 public:
-    TreeNode(int data);
+    TreeNode(int m);
     TreeNode(TreeNode& orig);
-    void addChild(int data);
+    bool addChild(int data);
+    bool insertData(int data, int level);
     int getData();
+    void setData(int data);
+    int getLevel();
+    void setLevel(int level);
+    TreeNode* getParent();
+    void setParent(TreeNode* parent);
     list<TreeNode*>* getChildren();
     bool isLeaf();
-    void printChildren();//md debug
+    bool isFull();
+    void printChildren();
     virtual ~TreeNode();
 };
 

@@ -18,8 +18,8 @@
 using namespace std;
 
 
-TreeNode::TreeNode(int data) {
-    this->data = data;
+TreeNode::TreeNode(int m) {
+    this->m = m;
 }
 
 TreeNode::TreeNode(TreeNode& orig) {
@@ -37,10 +37,44 @@ TreeNode::TreeNode(TreeNode& orig) {
     this->children.assign(orig.children.begin(),orig.children.end());
 }
 
-void TreeNode::addChild(int data)
+bool TreeNode::addChild(int data)
 {
-    TreeNode* newNode = new TreeNode(data);
-    this->children.push_back(newNode);
+    if(!isFull())
+    {
+        TreeNode* newNode = new TreeNode(this->m);
+        newNode->setData(data);
+        newNode->setLevel(this->level + 1);
+        this->children.push_back(newNode);
+        return true;
+    }
+    
+    return false;
+}
+
+bool TreeNode::insertData(int data, int level)
+{
+    if(this->level == level)
+    {
+        return addChild(data);
+    }
+    else
+    {
+        list<TreeNode*>::iterator childIterator = this->children.begin();
+    
+        while(childIterator != this->children.end())
+        {
+            if((*childIterator)->insertData(data, level))
+            {
+                return true;
+            }
+            else
+            {
+                childIterator++;
+            }
+        }
+    }
+    
+    return false;
 }
 
 list<TreeNode*>* TreeNode::getChildren()
@@ -53,18 +87,62 @@ int TreeNode::getData()
     return this->data;
 }
 
+void TreeNode::setData(int data)
+{
+    this->data = data;
+}
+
+int TreeNode::getLevel()
+{
+    return this->level;
+}
+
+void TreeNode::setLevel(int level)
+{
+    this->level = level;
+}
+
+TreeNode* TreeNode::getParent()
+{
+    return this->parent;
+}
+
+void TreeNode::setParent(TreeNode* parent)
+{
+    this->parent = parent;
+}
+
 bool TreeNode::isLeaf()
 {
     return this->children.empty();
+}
+
+bool TreeNode::isFull()
+{
+    return this->children.size() >= m;
 }
 
 void TreeNode::printChildren()
 {
     list<TreeNode*>::iterator childIterator = this->children.begin();
     
+    if(!this->isLeaf())
+        cout << "Level " << this->level << ": ";
+    
     while(childIterator != this->children.end())
     {
-        cout << "node data: " << (*childIterator)->getData() << endl;
+        cout << (*childIterator)->getData() << ",";
+        childIterator++;
+    }
+    
+     if(this->isFull())
+        cout << endl;
+    
+    childIterator = this->children.begin();
+    
+    while(childIterator != this->children.end())
+    {
+        (*childIterator)->printChildren();
         childIterator++;
     }
 }
@@ -74,6 +152,7 @@ TreeNode::~TreeNode() {
     
     while(childIterator != this->children.end())
     {
+        (*childIterator)->~TreeNode();//clear all branches
         delete (*childIterator);
         childIterator++;
     }
