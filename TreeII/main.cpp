@@ -21,8 +21,10 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    BinaryTreeNode tree(10, 0);
+    BinaryTreeNode tree(3, 0);
+    cout << "insert 10" << endl;
     tree.insert(10);
+    cout << "insert 9" << endl;
     tree.insert(9);
     tree.insert(8);
     tree.insert(7);
@@ -37,14 +39,23 @@ int main(int argc, char** argv) {
     cout << "Min: " << tree.findMin() << endl;
     cout << tree.find(3)->getData() << endl;
     cout << tree.find(9)->getData() << endl;
+    
     cout << tree.remove(9) << endl;
+    cout << tree.toStringInOrder() << endl;
     cout << tree.remove(3) << endl;
+    cout << tree.toStringInOrder() << endl;
     cout << tree.remove(8) << endl;
+    cout << tree.toStringInOrder() << endl;
     cout << tree.remove(10) << endl;
+    cout << tree.toStringInOrder() << endl;
     cout << tree.remove(10) << endl;
+    cout << tree.toStringInOrder() << endl;
     cout << tree.remove(9) << endl;
+    cout << tree.toStringInOrder() << endl;
     cout << tree.remove(9) << endl;
+    cout << tree.toStringInOrder() << endl;
     cout << tree.remove(7) << endl;
+    cout << tree.toStringInOrder() << endl;    
     cout << tree.remove(8) << endl;
     cout << "Root: " << tree.getData() << endl;
     cout << tree.toStringInOrder() << endl;

@@ -24,6 +24,8 @@ private:
     BinaryTreeNode* left;
     BinaryTreeNode* right;
     BinaryTreeNode* parent;
+    int height;
+    int balanceFactor;
 public:
     BinaryTreeNode(int data, BinaryTreeNode* parent);
     BinaryTreeNode(BinaryTreeNode& orig);
@@ -31,11 +33,18 @@ public:
     void setData(int data);
     BinaryTreeNode* getParent();
     void setParent(BinaryTreeNode* parent);
+    void updateHeight();
+    int getHeight();
+    int getBalanceFactor();
     void insert(int data);
     BinaryTreeNode* find(int data);
     int findMin();
     int findMax();
     bool remove(int data);
+    void leftRotation();
+    void rightRotation();
+    void leftRightRotation();
+    void rightLeftRotation();
     string toStringInOrder();
     string toStringPreOrder();
     string toStringPostOrder();
