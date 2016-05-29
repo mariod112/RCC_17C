@@ -34,6 +34,7 @@ public:
     void insert(int data);
     BinaryTreeNode* find(int data);
     int findMin();
+    int findMax();
     bool remove(int data);
     string toStringInOrder();
     string toStringPreOrder();

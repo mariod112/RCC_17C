@@ -113,6 +113,14 @@ int BinaryTreeNode::findMin()
         return this->left->findMin();
 }
 
+int BinaryTreeNode::findMax()
+{
+    if(this->right == 0)
+        return this->data;
+    else
+        return this->right->findMax();
+}
+
 bool BinaryTreeNode::remove(int data)
 {
     BinaryTreeNode* nodeToRemove = this->find(data);
@@ -122,7 +130,25 @@ bool BinaryTreeNode::remove(int data)
         BinaryTreeNode* tempParent = (*nodeToRemove).getParent();  
         BinaryTreeNode* tempNode;
         
-        if(nodeToRemove->left == 0 && nodeToRemove->right == 0)//delete leaf
+        if(tempParent == 0)//root
+        {
+            if(nodeToRemove->right != 0)
+            {
+                nodeToRemove->setData(nodeToRemove->right->findMin());
+                nodeToRemove->right->remove(nodeToRemove->getData());
+            }
+            else if(nodeToRemove->left != 0)
+            {
+                nodeToRemove->setData(nodeToRemove->left->findMax());
+                nodeToRemove->left->remove(nodeToRemove->getData()); 
+            }
+            else
+            {
+                nodeToRemove->data = 0;
+            }
+            return true;
+        }
+        else if(nodeToRemove->left == 0 && nodeToRemove->right == 0)//delete leaf
         {
 
             if(data < tempParent->getData())

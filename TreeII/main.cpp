@@ -40,8 +40,13 @@ int main(int argc, char** argv) {
     cout << tree.remove(9) << endl;
     cout << tree.remove(3) << endl;
     cout << tree.remove(8) << endl;
+    cout << tree.remove(10) << endl;
+    cout << tree.remove(10) << endl;
+    cout << tree.remove(9) << endl;
+    cout << tree.remove(9) << endl;
     cout << tree.remove(7) << endl;
-    cout << tree.remove(2) << endl;
+    cout << tree.remove(8) << endl;
+    cout << "Root: " << tree.getData() << endl;
     cout << tree.toStringInOrder() << endl;
     return 0;
 }
