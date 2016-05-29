@@ -15,7 +15,7 @@
 #include "BinaryTreeNode.h"
 
 BinaryTree::BinaryTree(int data) {
-    this->root = new BinaryTreeNode(data);
+    this->root = new BinaryTreeNode(data, 0);
 }
 
 BinaryTree::BinaryTree(const BinaryTree& orig) {

@@ -23,10 +23,18 @@ private:
     int data;
     BinaryTreeNode* left;
     BinaryTreeNode* right;
+    BinaryTreeNode* parent;
 public:
-    BinaryTreeNode(int data);
+    BinaryTreeNode(int data, BinaryTreeNode* parent);
     BinaryTreeNode(BinaryTreeNode& orig);
+    int getData();
+    void setData(int data);
+    BinaryTreeNode* getParent();
+    void setParent(BinaryTreeNode* parent);
     void insert(int data);
+    BinaryTreeNode* find(int data);
+    int findMin();
+    bool remove(int data);
     string toStringInOrder();
     string toStringPreOrder();
     string toStringPostOrder();
