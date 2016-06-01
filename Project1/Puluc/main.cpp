@@ -20,22 +20,6 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) { 
-//    HashArray columnArray(10);
-//    BoardColumn* column = new BoardColumn();
-//    BoardColumn* column2 = new BoardColumn();
-//
-//    columnArray.insert(to_string(1), column);
-//    columnArray.insert(to_string(2), column2);
-//    
-//    cout <<  columnArray.getColumn(to_string(1))->toString() << endl;
-//    Token token(1,1,"M");
-//    Token token2(1,1,"B");
-//    columnArray.getColumn(to_string(1))->addToken(token);
-//    columnArray.getColumn(to_string(2))->addToken(token2);
-//    columnArray.getColumn(to_string(1))->moveOnTopColumn(*column2);
-//    cout <<  columnArray.getColumn(to_string(1))->toString() << endl;
-//    cout <<  columnArray.getColumn(to_string(1))->getColumnTokens().front().getPlayer() << endl;
-
     PulucGame puluc;
     string tempName;
     int from;
@@ -125,6 +109,7 @@ int main(int argc, char** argv) {
         
     }while(!puluc.getGameEnded());
     
+    cout << puluc.boardString();
     cout << puluc.winnerString();
    
     return 0;

@@ -33,8 +33,12 @@ void Board::addColumn(int number, BoardColumn column)
 
 void Board::moveTokensInColumn(int from, int to)
 {
-    board.getColumn(to_string(to)).moveOnTopColumn(board.getColumn(to_string(from)));
-    board.getColumn(to_string(from)).clearColumn();
+    BoardColumn temp = board.getColumn(to_string(to));
+    temp.moveOnTopColumn(board.getColumn(to_string(from)));
+    board.insert(to_string(to), temp);
+    BoardColumn temp2;
+    board.insert(to_string(from),temp2);
+
 //    //if(board.count(from) != 0 && board.count(to) != 0)
 //    {
 //        board[to].moveOnTopColumn(board[from]);
@@ -105,7 +109,8 @@ int Board::getColumnPlayer(int from)
 
 void Board::clearColumn(int column)
 {
-    board.getColumn(to_string(column)).clearColumn();
+    BoardColumn temp;
+    board.insert(to_string(column), temp);
 //    board[column].clearColumn();
 }
 
@@ -184,8 +189,7 @@ string Board::toString()
     for(int i = 1; i <=  board.getSize(); i++)
     {
         boardString += "-----------------------------------------\n";
-        boardString += to_string(i) + ":" + mapIterator->toString() + "\n";
- 
+        boardString += to_string(i) + ":" + board.getColumn(to_string(i)).toString() + "\n";
         mapIterator++;
     }
     
