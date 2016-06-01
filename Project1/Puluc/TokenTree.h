@@ -26,6 +26,7 @@ public:
     TokenTree();
     TokenTree(const TokenTree& orig);
     void insert(Token token);
+    Token getTopToken();
     string toString();
     virtual ~TokenTree();
 

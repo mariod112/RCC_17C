@@ -17,13 +17,14 @@
 using namespace std;
 
 TokenTreeNode::TokenTreeNode() : token(-1,-1,"") {
+    this->left = 0;
+    this->right = 0;
 }
 
 TokenTreeNode::TokenTreeNode(TokenTreeNode& orig): token(-1,-1,"") {
     this->token = orig.token;
     this->left = orig.left;
     this->right = orig.right;
-    this->parent = orig.parent;
 }
 
 bool TokenTreeNode::insertToken(Token token)
@@ -33,34 +34,33 @@ bool TokenTreeNode::insertToken(Token token)
         this->token = token;
         return true;
     }
-    else if(token.getPlayer() == this->token.getPlayer())//freed tokens on left
-    {
-        if(this->left == 0)
-        {
-            this->left = new TokenTreeNode();
-            this->left->token = token;
-            return true;
-        }
-        else
-        {
-            return this->left->insertToken(token);
-        }
-    }
-    else//captured tokens on right
-    {
-        if(this->right == 0)
-        {
-            this->right = new TokenTreeNode();
-            this->right->token = token;
-            return true;
-        }
-        else
-        {
-            return this->right->insertToken(token);
-        }
-    }
 }
 
+Token TokenTreeNode::getToken()
+{
+    return this->token;
+}
+
+TokenTreeNode* TokenTreeNode::getLeft()
+{
+    return this->left;
+}
+
+TokenTreeNode* TokenTreeNode::getRight()
+{
+    return this->right;
+}
+
+void TokenTreeNode::setLeft(TokenTreeNode* left)
+{
+    this->left = left;
+}
+
+void TokenTreeNode::setRight(TokenTreeNode* right)
+{
+    this->right = right;
+}
+    
 string TokenTreeNode::toString()
 {
     string tokenTreeString;

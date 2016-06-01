@@ -23,11 +23,15 @@ private:
     Token token;
     TokenTreeNode* left;
     TokenTreeNode* right;
-    TokenTreeNode* parent;
 public:
     TokenTreeNode();
     TokenTreeNode(TokenTreeNode& orig);
     bool insertToken(Token token);
+    Token getToken();
+    TokenTreeNode* getLeft();
+    TokenTreeNode* getRight();
+    void setLeft(TokenTreeNode* left);
+    void setRight(TokenTreeNode* right);
     string toString();
     virtual ~TokenTreeNode();
 };

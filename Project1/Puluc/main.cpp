@@ -25,12 +25,18 @@ using namespace std;
  */
 int main(int argc, char** argv) { 
     Token token1(1,1,"M1");
-    Token token2(2,2,"C2");
+    Token token2(2,1,"C1");
+    Token token3(1,2,"M2");
+    Token token4(2,2,"C2");
     
     TokenTree tree;
-    tree.insert(token1);
+    cout << tree.getTopToken().getPlayer() << endl;
     tree.insert(token2);
+    tree.insert(token3);
+    tree.insert(token1);
+    tree.insert(token4);
     cout << tree.toString() << endl;
+    cout << tree.getTopToken().getPlayer() << endl;
     
 //    PulucGame puluc;
 //    string tempName;
