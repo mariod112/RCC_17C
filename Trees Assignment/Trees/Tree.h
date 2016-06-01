@@ -11,6 +11,9 @@
  * Created on May 20, 2016, 9:30 AM
  */
 #include "TreeNode.h"
+#include <string>
+
+using namespace std;
 
 #ifndef TREE_H
 #define TREE_H
@@ -25,6 +28,7 @@ class Tree {
         Tree(const Tree& orig);
         bool insertData(int data);
         void print();
+        
         virtual ~Tree();
 };
 

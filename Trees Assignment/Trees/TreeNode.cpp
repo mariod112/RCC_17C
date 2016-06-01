@@ -122,6 +122,22 @@ bool TreeNode::isFull()
     return this->children.size() >= m;
 }
 
+string TreeNode::toStringPreOrder()
+{
+    string nodeString;
+    list<TreeNode*>::iterator childIterator = this->children.begin();
+    
+    nodeString += to_string(this->data) + " ";
+    
+    while(childIterator != this->children.end())
+    {
+        nodeString += (*childIterator)->toStringPreOrder();
+        childIterator++;
+    }
+    
+    return nodeString;
+}
+
 void TreeNode::printChildren()
 {
     list<TreeNode*>::iterator childIterator = this->children.begin();

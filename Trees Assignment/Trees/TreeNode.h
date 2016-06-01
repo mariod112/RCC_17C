@@ -10,7 +10,7 @@
  *
  * Created on May 20, 2016, 9:32 AM
  */
-
+#include <string>
 #include <list>
 
 using namespace std;
@@ -39,6 +39,7 @@ public:
     list<TreeNode*>* getChildren();
     bool isLeaf();
     bool isFull();
+    string toStringPreOrder();
     void printChildren();
     virtual ~TreeNode();
 };
