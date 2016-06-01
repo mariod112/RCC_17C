@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   PulucGame.cpp
  * Author: mario
@@ -43,7 +37,7 @@ void PulucGame::setUpBoard()
         board.moveTokenIntoHome(token);
     }
     
-    //add tokens into home queue for player 1
+    //add tokens into home queue for player 2
     playerInitial = player2.getName().substr(0,1);
     
     for(int i = 1; i < 6; i++)
@@ -56,6 +50,8 @@ void PulucGame::setUpBoard()
     for(int i = 1; i < 11; i++)
     {
         BoardColumn column;
+//        Token token(1,1,"M1");
+//        column.addToken(token);
         board.addColumn(i, column);
     }
 }

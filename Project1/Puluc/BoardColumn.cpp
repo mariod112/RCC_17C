@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   BoardColumn.cpp
  * Author: mario
@@ -12,6 +6,7 @@
  */
 
 #include "BoardColumn.h"
+#include <algorithm>
 #include <list>
 #include <string>
 #include "Token.h"
@@ -90,13 +85,12 @@ Token BoardColumn::pullTopToken()
 string BoardColumn::toString()
 {
     string columnString;
-    list<Token>::iterator columnIterator;//get list iterator
-
+    
     if(!column.empty())
     {
-        for(columnIterator = column.begin(); columnIterator != column.end(); ++columnIterator)//iterate through list of tokens
+        for(Token token: column)
         {
-            string temp = columnIterator->getName();//get token name
+            string temp = token.getName();//get token name
             columnString += temp + "  ";//add token name to column string
         }
     }

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   Board.h
  * Author: mario
@@ -12,6 +6,7 @@
  */
 
 #include "BoardColumn.h"
+#include "HashArray.h"
 #include <map>
 #include <queue>
 #include <set>
@@ -26,7 +21,8 @@ using namespace std;
 
 class Board {
 private:
-    map<int,BoardColumn> board;
+    //map<int,BoardColumn> board;
+    HashArray board;
     queue<Token> player1Home;
     queue<Token> player2Home;
     set<Token> player1DeadTokens;

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   Board.cpp
  * Author: mario
@@ -19,11 +13,11 @@
 
 using namespace std;
 
-Board::Board() {
+Board::Board() : board(10) {
     
 }
 
-Board::Board(const Board& orig) {
+Board::Board(const Board& orig) : board(10){
     this->board = orig.board;
     this->player1Home = orig.player1Home;
     this->player2Home= orig.player2Home;
@@ -33,27 +27,33 @@ Board::Board(const Board& orig) {
 
 void Board::addColumn(int number, BoardColumn column)
 {
-    board[number] = column;
+    board.insert(to_string(number), column);
+//    board[number] = column;
 }
 
 void Board::moveTokensInColumn(int from, int to)
 {
-    if(board.count(from) != 0 && board.count(to) != 0)
-    {
-        board[to].moveOnTopColumn(board[from]);
-        board[from].clearColumn();
-    }
+    board.getColumn(to_string(to)).moveOnTopColumn(board.getColumn(to_string(from)));
+    board.getColumn(to_string(from)).clearColumn();
+//    //if(board.count(from) != 0 && board.count(to) != 0)
+//    {
+//        board[to].moveOnTopColumn(board[from]);
+//        board[from].clearColumn();
+//    }
 }
 
 bool Board::moveTokenFromHome(int to, int playerNumber)
 {
-   if(board.count(to) != 0)
+//   if(board.count(to) != 0)
    {
        if(playerNumber == 1)
        {
            if(!player1Home.empty())
            {
-               board[to].addToken(player1Home.front());
+               BoardColumn temp = board.getColumn(to_string(to));
+               temp.addToken(player1Home.front());
+               board.insert(to_string(to), temp);
+//               board[to].addToken(player1Home.front());
                player1Home.pop();
            }
            else
@@ -63,7 +63,10 @@ bool Board::moveTokenFromHome(int to, int playerNumber)
        {
            if(!player2Home.empty())
            {
-               board[to].addToken(player2Home.front());
+               BoardColumn temp = board.getColumn(to_string(to));
+               temp.addToken(player2Home.front());
+               board.insert(to_string(to), temp);
+               //board[to].addToken(player2Home.front());
                player2Home.pop();
            }
            else
@@ -90,17 +93,20 @@ void Board::moveTokenIntoHome(Token token)
 
 list<Token> Board::getColumnTokens(int from)
 {
-    return board[from].getColumnTokens();
+    return board.getColumn(to_string(from)).getColumnTokens();
+//    return board[from].getColumnTokens();
 }
 
 int Board::getColumnPlayer(int from)
 {
-    return board[from].getTopPlayer();
+    return board.getColumn(to_string(from)).getTopPlayer();
+//    return board[from].getTopPlayer();
 }
 
 void Board::clearColumn(int column)
 {
-    board[column].clearColumn();
+    board.getColumn(to_string(column)).clearColumn();
+//    board[column].clearColumn();
 }
 
 void Board::killToken(Token token)//token needs to be removed from original location
@@ -141,11 +147,11 @@ int Board::getHomeCount(int player)
 
 bool Board::checkPlayerFreeOnBoard(int player)
 {
-    map<int,BoardColumn>::iterator mapIterator = board.begin();
-    
-    while(mapIterator != board.end())
+    vector<BoardColumn>::iterator mapIterator = board.getBegin();
+
+    while(mapIterator != board.getEnd())
     {
-        if(mapIterator->second.getTopPlayer() == player)//check if player controls column
+        if(mapIterator->getTopPlayer() == player)//check if player controls column
             return true;
         
         mapIterator++;
@@ -158,7 +164,7 @@ string Board::toString()
 {
     string boardString;
     
-    map<int,BoardColumn>::iterator mapIterator = board.begin();
+    vector<BoardColumn>::iterator mapIterator = board.getBegin();
     set<Token>::iterator deadIterator;
     
     boardString = "Player 1: \n";
@@ -175,13 +181,22 @@ string Board::toString()
     
     boardString += "\n=========================================\n";
 
-    while(mapIterator != board.end())
+    for(int i = 1; i <=  board.getSize(); i++)
     {
         boardString += "-----------------------------------------\n";
-        boardString += to_string(mapIterator->first) + ":" + mapIterator->second.toString() + "\n";
+        boardString += to_string(i) + ":" + mapIterator->toString() + "\n";
  
         mapIterator++;
     }
+    
+    
+//    while(mapIterator != board.getEnd())
+//    {
+//        boardString += "-----------------------------------------\n";
+//        boardString += to_string(mapIterator->first) + ":" + mapIterator->second.toString() + "\n";
+// 
+//        mapIterator++;
+//    }
   
     boardString += "-----------------------------------------\n";
     boardString += "=========================================\n";

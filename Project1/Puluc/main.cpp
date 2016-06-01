@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   main.cpp
  * Author: mario
@@ -18,12 +12,29 @@
 #include "BoardColumn.h"
 #include "Board.h"
 
+#include "HashArray.h"
+
 using namespace std;
 
 /*
  * 
  */
 int main(int argc, char** argv) { 
+//    HashArray columnArray(10);
+//    BoardColumn* column = new BoardColumn();
+//    BoardColumn* column2 = new BoardColumn();
+//
+//    columnArray.insert(to_string(1), column);
+//    columnArray.insert(to_string(2), column2);
+//    
+//    cout <<  columnArray.getColumn(to_string(1))->toString() << endl;
+//    Token token(1,1,"M");
+//    Token token2(1,1,"B");
+//    columnArray.getColumn(to_string(1))->addToken(token);
+//    columnArray.getColumn(to_string(2))->addToken(token2);
+//    columnArray.getColumn(to_string(1))->moveOnTopColumn(*column2);
+//    cout <<  columnArray.getColumn(to_string(1))->toString() << endl;
+//    cout <<  columnArray.getColumn(to_string(1))->getColumnTokens().front().getPlayer() << endl;
 
     PulucGame puluc;
     string tempName;
@@ -36,14 +47,14 @@ int main(int argc, char** argv) {
     
     cout << "Rules available at: http://www.boardgamesoftheworld.com/puluc.html" <<endl;
     
-    cout << "Please Enter Player 1 name: ";
-    cin >> tempName;
-    puluc.setPlayer1Name(tempName);
-    
-    cout << "Please Enter Player 2 name: ";
-    cin >> tempName;
-    puluc.setPlayer2Name(tempName);
-    
+//    cout << "Please Enter Player 1 name: ";
+//    cin >> tempName;
+//    puluc.setPlayer1Name(tempName);
+//    
+//    cout << "Please Enter Player 2 name: ";
+//    cin >> tempName;
+//    puluc.setPlayer2Name(tempName);
+//    
     
     puluc.setUpBoard();
     
