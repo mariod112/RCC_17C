@@ -25,7 +25,7 @@ Board::Board(const Board& orig) : board(10){
     this->player2DeadTokens= orig.player2DeadTokens;
 }
 
-void Board::addColumn(int number, BoardColumn column)
+void Board::addColumn(int number, TreeBoardColumn column)
 {
     board.insert(to_string(number), column);
 //    board[number] = column;
@@ -33,10 +33,10 @@ void Board::addColumn(int number, BoardColumn column)
 
 void Board::moveTokensInColumn(int from, int to)
 {
-    BoardColumn temp = board.getColumn(to_string(to));
+    TreeBoardColumn temp = board.getColumn(to_string(to));
     temp.moveOnTopColumn(board.getColumn(to_string(from)));
     board.insert(to_string(to), temp);
-    BoardColumn temp2;
+    TreeBoardColumn temp2;
     board.insert(to_string(from),temp2);
 
 //    //if(board.count(from) != 0 && board.count(to) != 0)
@@ -54,7 +54,7 @@ bool Board::moveTokenFromHome(int to, int playerNumber)
        {
            if(!player1Home.empty())
            {
-               BoardColumn temp = board.getColumn(to_string(to));
+               TreeBoardColumn temp = board.getColumn(to_string(to));
                temp.addToken(player1Home.front());
                board.insert(to_string(to), temp);
 //               board[to].addToken(player1Home.front());
@@ -67,7 +67,7 @@ bool Board::moveTokenFromHome(int to, int playerNumber)
        {
            if(!player2Home.empty())
            {
-               BoardColumn temp = board.getColumn(to_string(to));
+               TreeBoardColumn temp = board.getColumn(to_string(to));
                temp.addToken(player2Home.front());
                board.insert(to_string(to), temp);
                //board[to].addToken(player2Home.front());
@@ -109,7 +109,7 @@ int Board::getColumnPlayer(int from)
 
 void Board::clearColumn(int column)
 {
-    BoardColumn temp;
+    TreeBoardColumn temp;
     board.insert(to_string(column), temp);
 //    board[column].clearColumn();
 }
@@ -152,7 +152,7 @@ int Board::getHomeCount(int player)
 
 bool Board::checkPlayerFreeOnBoard(int player)
 {
-    vector<BoardColumn>::iterator mapIterator = board.getBegin();
+    vector<TreeBoardColumn>::iterator mapIterator = board.getBegin();
 
     while(mapIterator != board.getEnd())
     {
@@ -169,7 +169,7 @@ string Board::toString()
 {
     string boardString;
     
-    vector<BoardColumn>::iterator mapIterator = board.getBegin();
+    vector<TreeBoardColumn>::iterator mapIterator = board.getBegin();
     set<Token>::iterator deadIterator;
     
     boardString = "Player 1: \n";

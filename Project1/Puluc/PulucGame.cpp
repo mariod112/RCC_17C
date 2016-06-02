@@ -7,7 +7,7 @@
 
 #include "PulucGame.h"
 #include "Token.h"
-#include "BoardColumn.h"
+#include "TreeBoardColumn.h"
 
 PulucGame::PulucGame():player1("First",1),player2("Second",2),dice(4,1,0)
 {
@@ -49,7 +49,7 @@ void PulucGame::setUpBoard()
     
     for(int i = 1; i < 11; i++)
     {
-        BoardColumn column;
+        TreeBoardColumn column;
 //        Token token(1,1,"M1");
 //        column.addToken(token);
         board.addColumn(i, column);

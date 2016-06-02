@@ -13,6 +13,7 @@
 #include "Token.h"
 #include "TokenTreeNode.h"
 #include <string>
+#include <list>
 
 using namespace std;
 
@@ -22,11 +23,16 @@ using namespace std;
 class TokenTree {
 private:
     TokenTreeNode* root;
+    TokenTreeNode* currentCaptured;
+    TokenTreeNode* currentFreed;
 public:
     TokenTree();
-    TokenTree(const TokenTree& orig);
+    TokenTree(TokenTree& orig);
     void insert(Token token);
     Token getTopToken();
+    Token getNextCaptured();
+    Token getNextFreed();
+    list<Token> toList();
     string toString();
     virtual ~TokenTree();
 

@@ -65,7 +65,7 @@ string TokenTreeNode::toString()
 {
     string tokenTreeString;
     
-    tokenTreeString += this->token.getName() + "-";
+    tokenTreeString += this->token.getName() + " ";
     
     if(this->left != 0)
         tokenTreeString += this->left->toString();

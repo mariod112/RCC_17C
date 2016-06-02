@@ -15,9 +15,14 @@
 
 TokenTree::TokenTree() {
     this->root = 0;
+    this->currentCaptured = 0;
+    this->currentFreed = 0;
 }
 
-TokenTree::TokenTree(const TokenTree& orig) {
+TokenTree::TokenTree(TokenTree& orig) {
+    this->root = orig.root;
+    this->currentCaptured = orig.currentCaptured;
+    this->currentFreed = orig.currentFreed;
 }
 
 void TokenTree::insert(Token token)
@@ -41,6 +46,10 @@ void TokenTree::insert(Token token)
             root->setRight(0);
             root = temp;
         }
+        
+        //reset iterator
+        this->currentCaptured = 0;
+        this->currentFreed = 0;
     }
     else
     {
@@ -58,6 +67,70 @@ Token TokenTree::getTopToken()
         Token temp(-1,-1,"");
         return temp;
     }
+}
+Token TokenTree::getNextCaptured()
+{
+    if(this->currentCaptured != 0)
+    {
+        this->currentCaptured = this->currentCaptured->getLeft();
+    }
+    else if(this->root != 0)
+    {
+        this->currentCaptured = this->root->getRight();
+    }
+    
+    if(this->currentCaptured != 0)
+        return this->currentCaptured->getToken();
+    else
+    {
+        Token temp(-1,-1,"");
+        return temp;
+    }
+}
+
+Token TokenTree::getNextFreed()
+{
+    if(this->currentFreed != 0)
+    {
+        this->currentFreed = this->currentFreed->getLeft();
+    }
+    else if(this->root != 0)
+    {
+        this->currentFreed = this->root->getLeft();
+    }
+    
+    if(this->currentFreed != 0)
+        return this->currentFreed->getToken();
+    else
+    {
+        Token temp(-1,-1,"");
+        return temp;
+    }
+}
+
+list<Token> TokenTree::toList()
+{
+    list<Token> tokenList;
+
+    TokenTreeNode* temp = this->root;
+    
+    while(temp != 0)
+    {
+        tokenList.push_back(temp->getToken());
+        
+        temp = temp->getLeft();
+    }
+    
+    temp = this->root->getRight();
+    
+    while(temp != 0)
+    {
+        tokenList.push_back(temp->getToken());
+        
+        temp = temp->getLeft();
+    }
+    
+    return tokenList;
 }
 
 string TokenTree::toString()

@@ -6,7 +6,8 @@
  */
 
 #include "BoardColumn.h"
-#include "HashArray.h"
+#include "TreeBoardColumn.h"
+#include "HashedArrayTree.h"
 #include <map>
 #include <queue>
 #include <set>
@@ -22,7 +23,7 @@ using namespace std;
 class Board {
 private:
     //map<int,BoardColumn> board;
-    HashArray board;
+    HashedArrayTree board;
     queue<Token> player1Home;
     queue<Token> player2Home;
     set<Token> player1DeadTokens;
@@ -30,7 +31,7 @@ private:
 public:
     Board();
     Board(const Board& orig);
-    void addColumn(int number, BoardColumn column);
+    void addColumn(int number, TreeBoardColumn column);
     void moveTokensInColumn(int from, int to);
     bool moveTokenFromHome(int to, int playerNumber);
     void moveTokenIntoHome(Token token);

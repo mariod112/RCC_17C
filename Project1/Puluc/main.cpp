@@ -17,6 +17,7 @@
 
 #include "Token.h"
 #include "TokenTree.h"
+#include <list>
 
 using namespace std;
 
@@ -24,30 +25,44 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) { 
-    Token token1(1,1,"M1");
-    Token token2(2,1,"C1");
-    Token token3(1,2,"M2");
-    Token token4(2,2,"C2");
-    
-    TokenTree tree;
-    cout << tree.getTopToken().getPlayer() << endl;
-    tree.insert(token2);
-    tree.insert(token3);
-    tree.insert(token1);
-    tree.insert(token4);
-    cout << tree.toString() << endl;
-    cout << tree.getTopToken().getPlayer() << endl;
-    
-//    PulucGame puluc;
-//    string tempName;
-//    int from;
-//    string direction;
-//    bool directionBool;
-//    bool validFrom = false;
-//    bool validDirection = false;
-//    bool validMove = true;//make first move
+//    Token token1(1,1,"M1");
+//    Token token2(2,1,"C1");
+//    Token token3(1,2,"M2");
+//    Token token4(2,2,"C2");
 //    
-//    cout << "Rules available at: http://www.boardgamesoftheworld.com/puluc.html" <<endl;
+//    TokenTree tree;
+//    cout << tree.getTopToken().getPlayer() << endl;
+//    tree.insert(token1);
+//    tree.insert(token3);
+//    tree.insert(token2);
+//    tree.insert(token4);
+//    cout << tree.getNextCaptured().getName() << endl;
+//    cout << tree.getNextCaptured().getName() << endl;
+//    cout << tree.getNextFreed().getName() << endl;
+//    cout << tree.getNextFreed().getName() << endl;
+//    cout << tree.toString() << endl;
+//    cout << tree.getTopToken().getPlayer() << endl;
+//    
+//    list<Token> temp = tree.toList();
+//    list<Token>::iterator tokenList = temp.begin();
+//    
+//    while(tokenList != temp.end())
+//    {
+//        cout << tokenList->getName() << " ";
+//        tokenList++;
+//    }
+//    
+    
+    PulucGame puluc;
+    string tempName;
+    int from;
+    string direction;
+    bool directionBool;
+    bool validFrom = false;
+    bool validDirection = false;
+    bool validMove = true;//make first move
+    
+    cout << "Rules available at: http://www.boardgamesoftheworld.com/puluc.html" <<endl;
     
 //    cout << "Please Enter Player 1 name: ";
 //    cin >> tempName;
@@ -57,79 +72,79 @@ int main(int argc, char** argv) {
 //    cin >> tempName;
 //    puluc.setPlayer2Name(tempName);
 //    
-//    
-//    puluc.setUpBoard();
-//    
-//    do
-//    {
-//        if(validMove)//only go to next turn after valid move
-//        {
-//            cout << puluc.boardString();
-//            cout << puluc.nextTurn() << endl;
-//        }
-//        
-//        while(!validFrom)
-//        {
-//            cout << "Which row would you like to move from: 0 for base, -1 to pass, or -2 to exit)? ";
-//            cin >> from;
-//
-//            if(from == -2)
-//            {
-//                cout << "Exit";
-//                return 0;
-//            }
-//            else if(from == 0 || from == -1)//move from base skip direction
-//            {
-//                validFrom = true;
-//                validDirection = true;
-//            }                
-//            else if((from < 0) && (from > 11))
-//            {
-//                cout << "----Invalid input please try again----" << endl;
-//                validFrom = false;
-//            }
-//            else
-//                validFrom = true;
-//        }
-//
-//        while(!validDirection)
-//        {
-//            cout << "Move up (u) or down (d) or -1 to exit?";
-//            cin >> direction;
-//
-//            switch(direction.at(0))
-//            {
-//                case 'u':
-//                    directionBool = true;
-//                    validDirection = true;
-//                    break;
-//                case 'd':
-//                    directionBool = false;
-//                    validDirection = true;
-//                    break;
-//                case '-':
-//                    cout << "Exit";
-//                    return 0;
-//                default:
-//                    cout << "----Invalid input please try again----";
-//                    validDirection = false;
-//                    break;
-//            }
-//        }
-//
-//        validMove = puluc.nextMove(from,directionBool);
-//        
-//        if(!validMove)
-//            cout << "----Invalid move please try again----" << endl;
-// 
-//        validFrom =false;
-//        validDirection = false;
-//        
-//    }while(!puluc.getGameEnded());
-//    
-//    cout << puluc.boardString();
-//    cout << puluc.winnerString();
-//   
+    
+    puluc.setUpBoard();
+    
+    do
+    {
+        if(validMove)//only go to next turn after valid move
+        {
+            cout << puluc.boardString();
+            cout << puluc.nextTurn() << endl;
+        }
+        
+        while(!validFrom)
+        {
+            cout << "Which row would you like to move from: 0 for base, -1 to pass, or -2 to exit)? ";
+            cin >> from;
+
+            if(from == -2)
+            {
+                cout << "Exit";
+                return 0;
+            }
+            else if(from == 0 || from == -1)//move from base skip direction
+            {
+                validFrom = true;
+                validDirection = true;
+            }                
+            else if((from < 0) && (from > 11))
+            {
+                cout << "----Invalid input please try again----" << endl;
+                validFrom = false;
+            }
+            else
+                validFrom = true;
+        }
+
+        while(!validDirection)
+        {
+            cout << "Move up (u) or down (d) or -1 to exit?";
+            cin >> direction;
+
+            switch(direction.at(0))
+            {
+                case 'u':
+                    directionBool = true;
+                    validDirection = true;
+                    break;
+                case 'd':
+                    directionBool = false;
+                    validDirection = true;
+                    break;
+                case '-':
+                    cout << "Exit";
+                    return 0;
+                default:
+                    cout << "----Invalid input please try again----";
+                    validDirection = false;
+                    break;
+            }
+        }
+
+        validMove = puluc.nextMove(from,directionBool);
+        
+        if(!validMove)
+            cout << "----Invalid move please try again----" << endl;
+ 
+        validFrom =false;
+        validDirection = false;
+        
+    }while(!puluc.getGameEnded());
+    
+    cout << puluc.boardString();
+    cout << puluc.winnerString();
+   
     return 0;
 }
 

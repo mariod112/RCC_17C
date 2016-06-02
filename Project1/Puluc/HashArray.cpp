@@ -29,13 +29,9 @@ HashArray::HashArray(const HashArray& orig) {
 int HashArray::hashFunction(string key)
 {
     int index = 0;
-    
-    //for(int i = 0; i < key.size(); i++)
-    {
-        index += (int)key.at(key.size() - 1) - 48;
-        //index += (int)key[i] - 49;// (i+1);//pow(10,0);
-    }
-    
+
+    index += (int)key.at(key.size() - 1) - 48;
+
     return index;
 }
 
