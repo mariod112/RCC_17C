@@ -25,34 +25,6 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) { 
-//    Token token1(1,1,"M1");
-//    Token token2(2,1,"C1");
-//    Token token3(1,2,"M2");
-//    Token token4(2,2,"C2");
-//    
-//    TokenTree tree;
-//    cout << tree.getTopToken().getPlayer() << endl;
-//    tree.insert(token1);
-//    tree.insert(token3);
-//    tree.insert(token2);
-//    tree.insert(token4);
-//    cout << tree.getNextCaptured().getName() << endl;
-//    cout << tree.getNextCaptured().getName() << endl;
-//    cout << tree.getNextFreed().getName() << endl;
-//    cout << tree.getNextFreed().getName() << endl;
-//    cout << tree.toString() << endl;
-//    cout << tree.getTopToken().getPlayer() << endl;
-//    
-//    list<Token> temp = tree.toList();
-//    list<Token>::iterator tokenList = temp.begin();
-//    
-//    while(tokenList != temp.end())
-//    {
-//        cout << tokenList->getName() << " ";
-//        tokenList++;
-//    }
-//    
-    
     PulucGame puluc;
     string tempName;
     int from;
@@ -64,14 +36,14 @@ int main(int argc, char** argv) {
     
     cout << "Rules available at: http://www.boardgamesoftheworld.com/puluc.html" <<endl;
     
-//    cout << "Please Enter Player 1 name: ";
-//    cin >> tempName;
-//    puluc.setPlayer1Name(tempName);
-//    
-//    cout << "Please Enter Player 2 name: ";
-//    cin >> tempName;
-//    puluc.setPlayer2Name(tempName);
-//    
+    cout << "Please Enter Player 1 name: ";
+    cin >> tempName;
+    puluc.setPlayer1Name(tempName);
+    
+    cout << "Please Enter Player 2 name: ";
+    cin >> tempName;
+    puluc.setPlayer2Name(tempName);
+    
     
     puluc.setUpBoard();
     
